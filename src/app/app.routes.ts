@@ -10,7 +10,7 @@ export const routes: Routes = [
         component: ContactoComponent
     },
     {
-        path: 'registro',
+        path: 'registrar',
         component: RegistroUserComponent
     },
     {
@@ -18,7 +18,7 @@ export const routes: Routes = [
         component: LoginComponent
     },
     {
-        path: 'home',
+        path: '',
         component: HomeComponent
     }
 ];
