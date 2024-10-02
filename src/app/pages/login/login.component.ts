@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
     this.apiService.post<ApiResponse<User>>('/user/login', this.frmLogin.value).subscribe({
       next: (response) => {
         // Aquí la respuesta es del tipo ApiResponse<User>
-        console.log(response.body);
+        console.log(response);
       },
       error: err => {
         console.error(err);
