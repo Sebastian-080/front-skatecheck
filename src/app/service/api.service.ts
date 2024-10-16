@@ -16,7 +16,7 @@ export class ApiService {
 
   get<T>(endpoint: string): Observable<ApiResponse<T>> {
     return this.http.get<ApiResponse<T>>(this.baseUrl + endpoint).pipe(
-      catchError(this.handleError)
+      catchError(this.handleError) // Handle errors
     );
   }
 
