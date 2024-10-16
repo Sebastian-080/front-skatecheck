@@ -6,6 +6,7 @@ import { ApiResponse } from '../../models/api-response.model';
 import { Evento } from '../../models/evento.model';
 import { CommonModule } from '@angular/common';
 import { User } from '../../models/user.model';
+import { asistencia } from '../../models/asistencia.model';
 
 @Component({
   selector: 'app-quiz',
@@ -49,11 +50,21 @@ export class QuizComponent implements OnInit {
     });
   }
   
-  
-  
-  
-
   asistencia() {
-    // Handle form submission here
+    console.log(this.frmAsistencia.value);
+    
+
+    // Aquí estamos asegurando que estamos usando ApiResponse<User>
+    this.apiService.post<ApiResponse<asistencia>>('/evento/asistencia/create', this.frmAsistencia.value).subscribe({
+      next: (response) => {
+        // Aquí la respuesta es del tipo ApiResponse<User>
+        console.log(response);
+      },
+      error: err => {
+        console.error(err);
+      }
+    });
+    this.frmAsistencia.reset();
+    alert("Asisencia Registrada.")
   }
 }
