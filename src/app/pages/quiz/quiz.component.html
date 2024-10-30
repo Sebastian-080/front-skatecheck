@@ -26,7 +26,7 @@
             <ion-label position="floating">Nombre del participante</ion-label>
               <ion-select formControlName="usuario" placeholder="Seleccionar uno">
                 <ion-select-option *ngFor="let option of userList" [value]="option.id">
-                  {{ option.name }}
+                  {{ option.nombre }}
                 </ion-select-option>
               </ion-select>
           </ion-item>

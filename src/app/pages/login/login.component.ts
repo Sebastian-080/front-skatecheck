@@ -33,9 +33,11 @@ export class LoginComponent implements OnInit {
       next: (response) => {
         // Aquí la respuesta es del tipo ApiResponse<User>
         console.log(response);
+        alert("Datos correctos.")
       },
       error: err => {
         console.error(err);
+        alert("Datos incorrectos.")
       }
     });
   }

@@ -32,22 +32,24 @@ export class RegistroUserComponent  implements OnInit {
   Registro(){
     console.log(this.frmRegister.value);
 
-    if (!this.frmRegister.invalid) {
+    if (this.frmRegister.invalid) {
       alert("Datos Incompletos.")
+    } else {
+      // Aquí estamos asegurando que estamos usando ApiResponse<User>
+      this.apiService.post<ApiResponse<User>>('/user/register', this.frmRegister.value).subscribe({
+        next: (response) => {
+          // Aquí la respuesta es del tipo ApiResponse<User>
+          console.log(response);
+          alert("Usuario Creado Existosamente.")
+  
+          this.frmRegister.reset();
+        },
+        error: err => {
+          console.error(err);
+          alert("ERROR!.")
+        }
+      });
     }
-
-    // Aquí estamos asegurando que estamos usando ApiResponse<User>
-    this.apiService.post<ApiResponse<User>>('/user/register', this.frmRegister.value).subscribe({
-      next: (response) => {
-        // Aquí la respuesta es del tipo ApiResponse<User>
-        console.log(response);
-      },
-      error: err => {
-        console.error(err);
-      }
-    });
-
-    this.frmRegister.reset();
   }
 
 }

@@ -39,7 +39,7 @@ export class QuizComponent implements OnInit {
       }
     });
 
-    this.apiService.get<User[]>('/user/all').subscribe({
+    this.apiService.get<User[]>('/user').subscribe({
       next: (response: ApiResponse<User[]>) => {
         this.userList = response.body || []; // Safely assign the response body
         console.log(this.userList);
@@ -59,12 +59,13 @@ export class QuizComponent implements OnInit {
       next: (response) => {
         // Aquí la respuesta es del tipo ApiResponse<User>
         console.log(response);
+        this.frmAsistencia.reset();
+        alert("Asistencia Registrada.")
       },
       error: err => {
         console.error(err);
+        alert("ERROR.")
       }
     });
-    this.frmAsistencia.reset();
-    alert("Asisencia Registrada.")
   }
 }
