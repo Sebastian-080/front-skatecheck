@@ -1,0 +1,23 @@
+<ion-content>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="IniciarCamara()" [disabled]="started">Iniciar Cámara</ion-button>
+      <ion-button (click)="DetenerCamara()" [disabled]="!started">Detener Cámara</ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="TomarFoto()" [disabled]="!started">Tomar Foto</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+
+<div id="camera-container">
+  <ion-grid>
+    <ion-row>
+      <ion-col *ngFor="let img of imagen" size="4">
+        <img [src]="img" alt="">
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</div>
+
+</ion-content>
