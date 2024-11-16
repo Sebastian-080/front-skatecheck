@@ -53,6 +53,7 @@ export class AsistenciaComponent implements OnInit {
         console.log(response);
         this.frmAsistencia.reset();
         alert("Asistencia Registrada.")
+        this.getAsistencias();
       },
       error: err => {
         console.error(err);

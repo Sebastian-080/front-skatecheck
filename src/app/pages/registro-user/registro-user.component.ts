@@ -18,6 +18,7 @@ export class RegistroUserComponent  implements OnInit {
   frmRegister: FormGroup;
   edad: number | null = null;
   esMenor: boolean = false;
+  usuariosList: User[] = [];
 
   constructor(private apiService: ApiService) {
     this.frmRegister = new FormGroup({
@@ -33,7 +34,9 @@ export class RegistroUserComponent  implements OnInit {
     });
    }
 
-  ngOnInit() {}
+  ngOnInit(): void {
+    this.getUsuarios();
+  }
 
   Registro(){
     console.log(this.frmRegister.value);
@@ -49,6 +52,7 @@ export class RegistroUserComponent  implements OnInit {
           alert("Usuario Creado Existosamente.")
   
           this.frmRegister.reset();
+          this.getUsuarios();
         },
         error: err => {
           console.error(err);
@@ -73,6 +77,17 @@ export class RegistroUserComponent  implements OnInit {
 
     // Verificar si es menor de 18 años
     this.esMenor = this.edad < 18;
+  }
+
+  getUsuarios() {
+    this.apiService.get<User[]>(`/user`).subscribe({
+      next: (response: ApiResponse<User[]>) => {
+        this.usuariosList = response.body || [];
+      },
+      error: err => {
+        console.error(err); // Log the error
+      }
+    });
   }
 
 }

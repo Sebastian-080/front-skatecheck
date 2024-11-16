@@ -98,4 +98,39 @@
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <!-- Tabla para mostrar los usuarios -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Lista de Usuarios</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <table class="estudiante-table">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Nro Documento</th>
+            <th>Fecha Nacimiento</th>
+            <th>Telefono</th>
+            <th>Correo</th>
+            <th>Nombre Acudiente</th>
+            <th>Telefono Acudiente</th>
+            <th>Correo Acudiente</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let usuario of usuariosList">
+            <td>{{ usuario.nombre }}</td>
+            <td>{{ usuario.estudiante.nro_documento }}</td>
+            <td>{{ usuario.estudiante.fecha_nacimiento | date:'dd/MM/yyyy' }}</td>
+            <td>{{ usuario.estudiante.telefono }}</td>
+            <td>{{ usuario.estudiante.correo }}</td>
+            <td>{{ usuario.estudiante.nombre_acudiente }}</td>
+            <td>{{ usuario.estudiante.telefono_acudiente }}</td>
+            <td>{{ usuario.estudiante.correo_acudiente }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -1,3 +1,21 @@
 <ion-app>
-    <ion-router-outlet></ion-router-outlet>
+    <!-- Menú Horizontal (Toolbar) -->
+    <ion-header *ngIf="showMenu">
+        <ion-toolbar>
+            <ion-buttons slot="start">
+            <!-- Aquí se pueden agregar iconos o botones adicionales -->
+            <ion-button routerLink="/">Inicio</ion-button>
+            <ion-button routerLink="/registrar">Registrar Estudiante</ion-button>
+            <ion-button routerLink="/clase">Clase</ion-button>
+            <ion-button routerLink="/asistencia">Asistencia</ion-button>
+            <ion-button (click)="logout()">Cerrar Session</ion-button>
+            </ion-buttons>
+        </ion-toolbar>
+    </ion-header>
+
+    <!-- Contenido principal de la página -->
+    <ion-content>
+      
+        <ion-router-outlet></ion-router-outlet>
+    </ion-content>
 </ion-app>
