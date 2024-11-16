@@ -1,0 +1,106 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Clases</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Registro de clase</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <form [formGroup]="frmClase" (ngSubmit)="clase()">  
+          <ion-list>
+            <ion-grid>
+              <!-- Primera fila: Fecha de Clase y Hora de Ingreso -->
+              <ion-row>
+                <!-- Fecha de Clase -->
+                <ion-col size="6">
+                  <ion-item>
+                    <ion-label position="stacked">Fecha de Clase</ion-label>
+                    <ion-datetime formControlName="fecha_clase" placeholder="Seleccione una fecha" presentation="date"></ion-datetime>
+                  </ion-item>
+                  <ion-text color="danger" *ngIf="frmClase.get('fecha_clase')?.hasError('required') && frmClase.get('fecha_clase')?.touched">
+                    <p>La fecha de clase es obligatoria.</p>
+                  </ion-text>
+                </ion-col>
+        
+                <!-- Hora de Ingreso -->
+                <ion-col size="6">
+                  <ion-item>
+                    <ion-label position="stacked">Hora de Ingreso</ion-label>
+                    <ion-datetime formControlName="hora_ingreso" displayFormat="HH:mm" placeholder="Seleccione la hora" presentation="time"></ion-datetime>
+                  </ion-item>
+                  <ion-text color="danger" *ngIf="frmClase.get('hora_ingreso')?.hasError('required') && frmClase.get('hora_ingreso')?.touched">
+                    <p>La hora de ingreso es obligatoria.</p>
+                  </ion-text>
+                </ion-col>
+              </ion-row>
+        
+              <!-- Segunda fila: Tiempo de Clase y Cantidad de Estudiantes -->
+              <ion-row>
+                <!-- Tiempo de Clase -->
+                <ion-col size="6">
+                  <ion-item>
+                    <ion-label position="stacked">Tiempo de Clase (minutos)</ion-label>
+                    <ion-input type="number" formControlName="tiempo_clase" placeholder="Ingrese el tiempo"></ion-input>
+                  </ion-item>
+                  <ion-text color="danger" *ngIf="frmClase.get('tiempo_clase')?.hasError('required') && frmClase.get('tiempo_clase')?.touched">
+                    <p>El tiempo de clase es obligatorio.</p>
+                  </ion-text>
+                </ion-col>
+        
+                <!-- Cantidad de Estudiantes -->
+                <ion-col size="6">
+                  <ion-item>
+                    <ion-label position="stacked">Cantidad de Estudiantes</ion-label>
+                    <ion-input type="number" formControlName="cantidad_estudiantes" placeholder="Ingrese la cantidad"></ion-input>
+                  </ion-item>
+                  <ion-text color="danger" *ngIf="frmClase.get('cantidad_estudiantes')?.hasError('required') && frmClase.get('cantidad_estudiantes')?.touched">
+                    <p>La cantidad de estudiantes es obligatoria.</p>
+                  </ion-text>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-list>
+
+          <ion-row class="ion-margin-top">
+            <ion-col class="ion-text-center">
+              <ion-button type="submit" expand="block" color="primary" [disabled]="frmClase.invalid">
+                Enviar
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </form>
+        
+      </ion-card-content>      
+    </ion-card>
+  </div>
+
+  <!-- Tabla para mostrar las clases -->
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Lista de Clases</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <table class="clase-table">
+        <thead>
+          <tr>
+            <th>Fecha de Clase</th>
+            <th>Hora Ingreso</th>
+            <th>Cantidad Estudiantes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let clase of claseList">
+            <td>{{ clase.fecha_clase | date:'dd/MM/yyyy' }}</td>
+            <td>{{ clase.hora_ingreso }}</td>
+            <td>{{ clase.cantidad_estudiantes }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

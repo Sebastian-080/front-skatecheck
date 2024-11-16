@@ -12,7 +12,7 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideIonicAngular({}),
     provideHttpClient(),
-    HttpClientModule // Esto debe estar aquí para que HttpClient esté disponible
+    // HttpClientModule // Esto debe estar aquí para que HttpClient esté disponible
   ]
 };
 

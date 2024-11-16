@@ -1,40 +1,101 @@
 <ion-content>
-  <div>
-    <ion-card>
-      <ion-card-header>
-        <ion-card-title>Registro de usuario</ion-card-title>
-      </ion-card-header>
-      <form [formGroup]="frmRegister" (ngSubmit)="Registro()">
-        <ion-card-content>
-          <ion-item>
-            <ion-label position="floating">Nombre Completo</ion-label>
-            <ion-input type="text" formControlName="nombre"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Correo electrónico</ion-label>
-            <ion-input type="Email" formControlName="correo"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Teléfono</ion-label>
-            <ion-input type="number" formControlName="telefono"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Dirección</ion-label>
-            <ion-input type="text" formControlName="direccion"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Usuario</ion-label>
-            <ion-input type="text" formControlName="usuario"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-label position="floating">Contraseña</ion-label>
-            <ion-input type="password" formControlName="pass"></ion-input>
-          </ion-item>
-          <ion-item>
-            <ion-button type="ngSubmit">Enviar</ion-button>
-          </ion-item>
-        </ion-card-content>
-      </form>
-    </ion-card>
-  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="12" size-md="8" offset-md="2">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title class="ion-text-center">Registro de Estudiante</ion-card-title>
+          </ion-card-header>
+          <form [formGroup]="frmRegister" (ngSubmit)="Registro()">
+            <ion-card-content>
+              <ion-item>
+                <ion-label position="floating">Documento de Identidad</ion-label>
+                <ion-input type="text" formControlName="doc"></ion-input>
+              </ion-item>
+              <ion-text color="danger" *ngIf="frmRegister.get('doc')?.hasError('required') && frmRegister.get('doc')?.touched">
+                El documento es obligatorio.
+              </ion-text>
+
+              <ion-item>
+                <ion-label position="floating">Nombre</ion-label>
+                <ion-input type="text" formControlName="nombre"></ion-input>
+              </ion-item>
+              <ion-text color="danger" *ngIf="frmRegister.get('nombre')?.hasError('required') && frmRegister.get('nombre')?.touched">
+                El nombre es obligatorio.
+              </ion-text>
+
+              <ion-item>
+                <ion-label position="floating">Apellido</ion-label>
+                <ion-input type="text" formControlName="apellido"></ion-input>
+              </ion-item>
+              <ion-text color="danger" *ngIf="frmRegister.get('apellido')?.hasError('required') && frmRegister.get('apellido')?.touched">
+                El apellido es obligatorio.
+              </ion-text>
+
+              <ion-item>
+                <ion-label position="floating">Correo Electrónico</ion-label>
+                <ion-input type="email" formControlName="correo"></ion-input>
+              </ion-item>
+              <ion-text color="danger" *ngIf="frmRegister.get('correo')?.hasError('required') && frmRegister.get('correo')?.touched">
+                El correo es obligatorio.
+              </ion-text>
+
+              <ion-item>
+                <ion-label position="floating">Teléfono</ion-label>
+                <ion-input type="number" formControlName="telefono"></ion-input>
+              </ion-item>
+              <ion-text color="danger" *ngIf="frmRegister.get('telefono')?.hasError('required') && frmRegister.get('telefono')?.touched">
+                El telefono es obligatorio.
+              </ion-text>
+
+              <ion-item>
+                <ion-label position="floating">Fecha de Nacimiento</ion-label>
+                <ion-datetime 
+                  presentation="date" 
+                  placeholder="Selecciona una fecha" 
+                  formControlName="nacimiento" 
+                  (ionChange)="onBirthdateChange($event)">
+                </ion-datetime>
+              </ion-item>
+              <ion-text color="danger" *ngIf="frmRegister.get('nacimiento')?.hasError('required') && frmRegister.get('nacimiento')?.touched">
+                La fecha de nacimiento es obligatoria.
+              </ion-text>
+
+              <ion-item>
+                <ion-label>Edad:</ion-label>
+                <ion-text>{{ edad || 'Sin calcular' }}</ion-text>
+              </ion-item>
+
+              <ion-card-title *ngIf="esMenor" class="ion-text-start">Información del Acudiente</ion-card-title>
+
+              <div *ngIf="esMenor">
+                <ion-item>
+                  <ion-label position="floating">Nombre Completo</ion-label>
+                  <ion-input type="text" formControlName="nombre_acudiente"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">Correo Electrónico</ion-label>
+                  <ion-input type="email" formControlName="correo_acudiente"></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="floating">Teléfono</ion-label>
+                  <ion-input type="number" formControlName="telefono_acudiente"></ion-input>
+                </ion-item>
+              </div>
+
+              <ion-row class="ion-margin-top">
+                <ion-col class="ion-text-center">
+                  <ion-button type="submit" expand="block" color="primary" [disabled]="frmRegister.invalid">
+                    Enviar
+                  </ion-button>
+                </ion-col>
+              </ion-row>
+            </ion-card-content>
+          </form>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

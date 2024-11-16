@@ -1,19 +1,19 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
-import { QuizComponent } from './quiz.component';
+import { ClaseComponent } from './clase.component';
 
-describe('QuizComponent', () => {
-  let component: QuizComponent;
-  let fixture: ComponentFixture<QuizComponent>;
+describe('ClaseComponent', () => {
+  let component: ClaseComponent;
+  let fixture: ComponentFixture<ClaseComponent>;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
-      declarations: [ QuizComponent ],
+      declarations: [ ClaseComponent ],
       imports: [IonicModule.forRoot()]
     }).compileComponents();
 
-    fixture = TestBed.createComponent(QuizComponent);
+    fixture = TestBed.createComponent(ClaseComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   }));

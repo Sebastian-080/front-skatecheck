@@ -4,10 +4,11 @@ import { IonicModule } from '@ionic/angular';
 import { ApiService } from '../../service/api.service';
 import { User } from '../../models/user.model'; // Asegúrate de que esto esté correcto
 import { ApiResponse } from '../../models/api-response.model'; // Importa el modelo de respuesta
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-registro-user',
-  imports: [IonicModule, ReactiveFormsModule],
+  imports: [IonicModule, ReactiveFormsModule, CommonModule],
   standalone: true,
   providers: [ApiService],
   templateUrl: './registro-user.component.html',
@@ -15,15 +16,20 @@ import { ApiResponse } from '../../models/api-response.model'; // Importa el mod
 })
 export class RegistroUserComponent  implements OnInit {
   frmRegister: FormGroup;
+  edad: number | null = null;
+  esMenor: boolean = false;
 
   constructor(private apiService: ApiService) {
     this.frmRegister = new FormGroup({
+      doc: new FormControl('',Validators.required),
       nombre: new FormControl('',Validators.required),
-      correo: new FormControl('',Validators.required),
+      apellido: new FormControl('',Validators.required),
+      nacimiento: new FormControl('',Validators.required),
+      correo: new FormControl('', [Validators.required, Validators.email]),
       telefono: new FormControl('',Validators.required),
-      direccion: new FormControl('',Validators.required),
-      usuario: new FormControl('',Validators.required),
-      pass: new FormControl('',Validators.required)
+      nombre_acudiente: new FormControl(''),
+      correo_acudiente: new FormControl(''),
+      telefono_acudiente: new FormControl('')
     });
    }
 
@@ -36,7 +42,7 @@ export class RegistroUserComponent  implements OnInit {
       alert("Datos Incompletos.")
     } else {
       // Aquí estamos asegurando que estamos usando ApiResponse<User>
-      this.apiService.post<ApiResponse<User>>('/user/register', this.frmRegister.value).subscribe({
+      this.apiService.post<ApiResponse<User>>('/user', this.frmRegister.value).subscribe({
         next: (response) => {
           // Aquí la respuesta es del tipo ApiResponse<User>
           console.log(response);
@@ -50,6 +56,23 @@ export class RegistroUserComponent  implements OnInit {
         }
       });
     }
+  }
+
+  // Método para calcular la edad
+  onBirthdateChange(event: any): void {
+    const fechaNacimiento = new Date(event.detail.value);
+    const hoy = new Date();
+    const edadCalculada = hoy.getFullYear() - fechaNacimiento.getFullYear();
+    const mes = hoy.getMonth() - fechaNacimiento.getMonth();
+
+    if (mes < 0 || (mes === 0 && hoy.getDate() < fechaNacimiento.getDate())) {
+      this.edad = edadCalculada - 1;
+    } else {
+      this.edad = edadCalculada;
+    }
+
+    // Verificar si es menor de 18 años
+    this.esMenor = this.edad < 18;
   }
 
 }

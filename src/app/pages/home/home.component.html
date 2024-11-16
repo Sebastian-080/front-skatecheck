@@ -1,14 +1,51 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Skatecheck</ion-title>
+  </ion-toolbar>
+</ion-header>
+
 <ion-content>
-  <div>
+  <div class="dashboard-container">
     <ion-card>
       <ion-card-header>
-        <ion-card-title>Logistica.</ion-card-title>
+        <ion-card-title class="text-center">Bienvenido a Skatecheck</ion-card-title>
       </ion-card-header>
-        <ion-card-content>
-          <ion-item>
-            <ion-label>BIENVENIDO</ion-label>
-          </ion-item>
-        </ion-card-content>
+      <ion-card-content>
+        <p class="text-center">
+          Skatecheck es tu aplicación ideal para programar y gestionar tus clases de patinaje. 
+          Organiza y reserva tus lecciones con facilidad y lleva tu aprendizaje al siguiente nivel.
+        </p>
+      </ion-card-content>
     </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>¿Qué puedes hacer con Skatecheck?</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <ul>
+          <li><strong>Reservar clases:</strong> Encuentra y agenda clases de patinaje con instructores cercanos.</li>
+        </ul>
+        <ion-button expand="full" routerLink="/asistencia" color="secondary">
+          Ver Clases Disponibles
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>¿Cómo Funciona?</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p>
+          1. Regístrate en Skatecheck y completa tu perfil.<br>
+          2. Explora las clases disponibles y elige las que más te interesen.<br>
+          3. Reserva tu clase, paga directamente desde la app y empieza a patinar.
+        </p>
+      </ion-card-content>
+    </ion-card>
+
+    <app-contacto></app-contacto>
   </div>
 </ion-content>
+

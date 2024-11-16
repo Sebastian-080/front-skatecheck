@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Asistencia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Registro de asistencia</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <form [formGroup]="frmAsistencia" (ngSubmit)="asistencia()">
+
+          <ion-item>
+            <ion-label position="floating">Clase</ion-label>
+              <ion-select formControlName="clase_id" placeholder="Seleccionar uno">
+                <ion-select-option *ngFor="let option of claseList" [value]="option.clase_id">
+                  {{ option.fecha_clase | date: 'shortDate' }} {{ option.hora_ingreso}}
+                </ion-select-option>
+              </ion-select>
+          </ion-item>
+
+          <ion-item>
+            <ion-button type="submit">Registrar Asistencia</ion-button>
+          </ion-item>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4"><strong>ID Asistencia</strong></ion-col>
+      <ion-col size="4"><strong>Clase</strong></ion-col>
+      <ion-col size="4"><strong>Usuario</strong></ion-col>
+    </ion-row>
+
+    <!-- Mostrar las asistencias -->
+    <ion-row *ngFor="let asistencia of asistenciaList">
+      <ion-col size="4">{{ asistencia.asistencia_id }}</ion-col>
+      <ion-col size="4">{{ asistencia.clase.fecha_clase | date: 'shortDate' }} {{ asistencia.clase.hora_ingreso }}</ion-col>
+      <ion-col size="4">{{ asistencia.usuario.nombre }}</ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
